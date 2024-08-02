@@ -1,28 +1,42 @@
-Path Finding API
-Description
-
 Postman DOCS : "https://documenter.getpostman.com/view/37397155/2sA3rwLDt1"
 
 Hostedl Link : "https://shipmnts-path-finding-api.onrender.com/"
+# Path Finding API
+
+## Description
+
 This project is a robust Path Finding API that allows users to manage locations, roads, and traffic conditions, as well as calculate the shortest path between two points. It's built with Node.js, Express, and MongoDB, featuring JWT authentication for secure access.
 
-Features
-User Authentication: Secure signup and login using JWT.
-Location Management: Create, read, update, and delete locations.
-Road Management: Manage roads connecting locations.
-Traffic Condition Updates: Update and fetch traffic conditions.
-Shortest Path Calculation: Calculate the shortest path between two locations using Dijkstra's algorithm.
-Traffic Condition Reporting: Report and get real-time traffic conditions.
-Technologies Used
-Node.js
-Express.js
-MongoDB
-Mongoose
-JSON Web Tokens (JWT)
-bcrypt.js
-Installation
-Prerequisites
+## Features
+
+- **User Authentication**: Secure signup and login using JWT.
+- **Location Management**: Create, read, update, and delete locations.
+- **Road Management**: Manage roads connecting locations.
+- **Traffic Condition Updates**: Update and fetch traffic conditions.
+- **Shortest Path Calculation**: Calculate the shortest path between two locations using Dijkstra's algorithm.
+- **Traffic Condition Reporting**: Report and get real-time traffic conditions.
+
+## Technologies Used
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JSON Web Tokens (JWT)
+- bcrypt.js
+
+## Installation
+
+### Prerequisites
+
 Make sure you have Node.js and npm installed on your machine. You also need a MongoDB Atlas account to get a connection string.
+
+### Steps
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/path-finding-api.git
 
 Steps
 Clone the repository:
