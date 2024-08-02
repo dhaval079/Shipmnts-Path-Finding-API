@@ -35,8 +35,6 @@ app.get('/', (req, res) => {
       await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
   useUnifiedTopology: true,
-  ssl: true,
-  sslValidate: true,
       });
       console.log("MongoDB Database connected Successfully!");
     } catch (err) {
