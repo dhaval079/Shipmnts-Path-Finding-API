@@ -44,13 +44,3 @@ app.get('/', (req, res) => {
     mongoDB();
     console.log(`Server is running on http://localhost:${PORT}`);
   });
-  
-  
-  const startServer = async () => {
-    await mongoDB();
-    app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
-    });
-  };
-  
-  startServer();
