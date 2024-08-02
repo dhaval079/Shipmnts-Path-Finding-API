@@ -23,6 +23,13 @@ app.use("/api/v2/traffic", trafficRouter);
 app.use("/api/v2/shortest-path", shortestPathRouter);
 app.use("/api/v2/traffic-conditions", trafficConditionRouter);
 
+app.get('/', (req, res) => {
+    res.send(`
+      <h1>Server has started and API is Working</h1>
+      <p>Refer to the Postman Docs here: <a href="YOUR_POSTMAN_DOCS_LINK">Postman Documentation</a></p>
+    `);
+  });
+  
 const mongoDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
