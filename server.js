@@ -26,22 +26,28 @@ app.use("/api/v2/traffic-conditions", trafficConditionRouter);
 app.get('/', (req, res) => {
     res.send(`
       <h1>Server has started and API is Working</h1>
-      <p>Refer to the Postman Docs here: <a href="YOUR_POSTMAN_DOCS_LINK">Postman Documentation</a></p>
+      <p>Refer to the Postman Docs here: <a href="https://documenter.getpostman.com/view/37397155/2sA3rwLDt1">Postman Documentation</a></p>
     `);
   });
+  const mongoDB = async () => {
+    try {
+      await mongoose.connect(process.env.MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        ssl: true, // Ensure SSL is enabled if required
+      });
+      console.log("MongoDB Database connected successfully!");
+    } catch (err) {
+      console.error("Failed to connect to MongoDB:", err.message);
+      process.exit(1); // Exit the process with an error code
+    }
+  };
   
-const mongoDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URL);
-    console.log("MongoDB Database connected Successfully!");
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-}
-
-// Start server from here
-app.listen(PORT, () => {
-  mongoDB();
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+  const startServer = async () => {
+    await mongoDB();
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  };
+  
+  startServer();
