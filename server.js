@@ -33,15 +33,20 @@ app.get('/', (req, res) => {
     try {
       await mongoose.connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
-        useUnifiedTopology: true,
-        ssl: true, // Ensure SSL is enabled if required
+        useUnifiedTopology: true
       });
-      console.log("MongoDB Database connected successfully!");
+      console.log("MongoDB Database connected Successfully!");
     } catch (err) {
-      console.error("Failed to connect to MongoDB:", err.message);
-      process.exit(1); // Exit the process with an error code
+      console.log("Failed to connect to MongoDB:", err);
+      throw err;
     }
-  };
+  }
+  
+  app.listen(PORT, () => {
+    mongoDB();
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+  
   
   const startServer = async () => {
     await mongoDB();
