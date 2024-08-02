@@ -29,11 +29,14 @@ app.get('/', (req, res) => {
       <p>Refer to the Postman Docs here: <a href="https://documenter.getpostman.com/view/37397155/2sA3rwLDt1">Postman Documentation</a></p>
     `);
   });
+  
   const mongoDB = async () => {
     try {
       await mongoose.connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+      useNewUrlParser: true,
+  useUnifiedTopology: true,
+  ssl: true,
+  sslValidate: true,
       });
       console.log("MongoDB Database connected Successfully!");
     } catch (err) {
