@@ -40,98 +40,79 @@ Make sure you have Node.js and npm installed on your machine. You also need a Mo
 
 Steps
 Clone the repository:
-
-bash
-Copy code
-git clone https://github.com/yourusername/path-finding-api.git
-Navigate to the project directory:
-
-bash
-Copy code
-cd path-finding-api
 Install dependencies:
 
-bash
-Copy code
 npm install
-Create a .env file in the root directory and add the following:
 
-plaintext
-Copy code
+Set up environment variables: Create a .env file in the root directory with the following:
+
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 PORT=3000
-Replace your_mongodb_connection_string with your actual MongoDB connection string and your_jwt_secret with a secret key for JWT.
 
 Start the server:
 
-bash
-Copy code
-node server.js
+npm start
+
 The server should now be running on http://localhost:3000.
 
 API Endpoints
 Authentication
-POST /api/v2/signup: Register a new user.
-POST /api/v2/login: Authenticate a user and get a JWT token.
+POST /api/v1/auth/signup: Register a new user
+POST /api/v1/auth/login: Authenticate and receive JWT
 Locations
-GET /api/v2/locations: Get all locations.
-POST /api/v2/locations: Create a new location.
-PUT /api/v2/locations/
-: Update an existing location.
-DELETE /api/v2/locations/
-: Delete a location.
+POST /api/v1/locations: Add a new location
+GET /api/v1/locations: Retrieve all locations
 Roads
-GET /api/v2/roads: Get all roads.
-POST /api/v2/roads: Create a new road.
-PUT /api/v2/roads/
-: Update an existing road.
-DELETE /api/v2/roads/
-: Delete a road.
-Traffic Conditions
-GET /api/v2/traffic-conditions: Get traffic conditions.
-POST /api/v2/traffic-conditions: Report a new traffic condition.
-Shortest Path
-GET /api/v2/shortest-path: Calculate the shortest path between two locations.
-Usage
+POST /api/v1/roads: Add a new road
+GET /api/v1/roads: Retrieve all roads
+Traffic
+POST /api/v1/traffic/updates: Update traffic condition
+GET /api/v1/traffic-conditions/:id: Get traffic condition for a specific road
+GET /api/v1/traffic-conditions/report: Generate traffic report
+Path Finding
+GET /api/v1/shortest-path: Calculate shortest path between two locations
+Usage Examples
 Register a New User
-bash
-Copy code
-curl -X POST http://localhost:3000/api/v2/signup -H "Content-Type: application/json" -d '{
-  "username": "testuser",
-  "password": "testpassword"
-}'
-Authenticate a User
-bash
-Copy code
-curl -X POST http://localhost:3000/api/v2/login -H "Content-Type: application/json" -d '{
-  "username": "testuser",
-  "password": "testpassword"
-}'
-Create a Location
-bash
-Copy code
-curl -X POST http://localhost:3000/api/v2/locations -H "Authorization: Bearer <JWT_TOKEN>" -H "Content-Type: application/json" -d '{
-  "name": "Location A",
-  "latitude": 40.7128,
-  "longitude": -74.0060
-}'
-Fetch All Locations
-bash
-Copy code
-curl -X GET http://localhost:3000/api/v2/locations -H "Authorization: Bearer <JWT_TOKEN>"
+curl -X POST https://shipmnts-path-finding-api.onrender.com/api/v1/auth/signup \
+     -H "Content-Type: application/json" \
+     -d '{"username": "testuser", "email": "test@example.com", "password": "securepassword"}'
+
+Login
+curl -X POST https://shipmnts-path-finding-api.onrender.com/api/v1/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{"email": "test@example.com", "password": "securepassword"}'
+
+Add a Location
+curl -X POST https://shipmnts-path-finding-api.onrender.com/api/v1/locations \
+     -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d '{"name": "Central Park", "latitude": 40.7829, "longitude": -73.9654}'
+
 Calculate Shortest Path
-bash
-Copy code
-curl -X GET http://localhost:3000/api/v2/shortest-path -H "Authorization: Bearer <JWT_TOKEN>" -d '{
-  "start": "Location A",
-  "end": "Location B"
-}'
-Replace <JWT_TOKEN> with the token you received from the login endpoint.
+curl -X GET "https://shipmnts-path-finding-api.onrender.com/api/v1/shortest-path?start_location_id=ID1&end_location_id=ID2" \
+     -H "Authorization: Bearer YOUR_JWT_TOKEN"
 
-Contribution
-Contributions are welcome! Please fork the repository and submit a pull request for any changes you would like to make.
+Replace YOUR_JWT_TOKEN with the token received from the login endpoint.
 
+Error Handling
+The API uses standard HTTP status codes and returns detailed error messages in the response body for proper client-side error handling.
+
+Data Models
+User: username, email, password (hashed)
+Location: name, latitude, longitude
+Road: start_location, end_location, distance, traffic_condition
+TrafficUpdate: road, timestamp, traffic_condition
+Contributing
+Contributions are welcome! Please follow these steps:
+
+Fork the repository
+Create a new branch: git checkout -b feature-branch-name
+Make your changes and commit them: git commit -m 'Add some feature'
+Push to the branch: git push origin feature-branch-name
+Submit a pull request
 License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
+Contact
+For any queries or support, please open an issue on this GitHub repository.
