@@ -1,9 +1,8 @@
 const express = require('express');
-const { getShortestPath } = require('../controllers/shortestPathController');
-const { verifyToken } = require('../middleware/authMiddleware');
-
 const router = express.Router();
+const shortestPathController = require('../controllers/shortestPathController');
+const { authentication } = require('../middlewares/authMiddleware');
 
-router.get('/', verifyToken, getShortestPath);
+router.get('/', authentication, shortestPathController.getShortestPath);
 
 module.exports = router;

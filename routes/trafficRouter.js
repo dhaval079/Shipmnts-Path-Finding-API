@@ -1,10 +1,8 @@
 const express = require('express');
-const { getTrafficCondition, generateTrafficReport } = require('../controllers/trafficConditionController');
-const { verifyToken } = require('../middleware/authMiddleware');
-
 const router = express.Router();
+const trafficController = require('../controllers/trafficController');
+const { authentication, TrafficUpdate } = require('../middlewares/authMiddleware');
 
-router.get('/:id', verifyToken, getTrafficCondition);
-router.get('/report', verifyToken, generateTrafficReport);
+router.post('/updates', authentication, TrafficUpdate, trafficController.updateTraffic);
 
 module.exports = router;
